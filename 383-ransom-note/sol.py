@@ -1,5 +1,6 @@
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        if len(ransomNote) > len(magazine): return False
         
         availableLetters = {}
         for letter in magazine:
@@ -8,12 +9,9 @@ class Solution:
             availableLetters[letter] += 1
             
         for letter in ransomNote:
-            if letter not in availableLetters:
+            if letter not in availableLetters or availableLetters[letter] == 0:
                 return False
             availableLetters[letter] -= 1
             
-        for num in availableLetters.values():
-            if num < 0:
-                return False
             
         return True
