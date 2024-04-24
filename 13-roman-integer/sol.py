@@ -44,33 +44,29 @@ class Solution:
                 result += 1
                 
             if c == 'V':
-                result += 5
-                if s[i-1] == 'I' and i != 0:
-                    result -= 2
+                result = self.calculateCurrResult(result, s, i, 'I', 5, 2)
                 
             if c == 'X':
-                result += 10
-                if s[i-1] == 'I' and i != 0:
-                    result -= 2
+                result = self.calculateCurrResult(result, s, i, 'I', 10, 2)
                 
             if c == 'L':
-                result += 50
-                if s[i-1] == 'X' and i != 0:
-                    result -= 20
+                result = self.calculateCurrResult(result, s, i, 'X', 50, 20)
             
             if c == 'C':
-                result += 100
-                if s[i-1] == 'X' and i != 0:
-                    result -= 20
+                result = self.calculateCurrResult(result, s, i, 'X', 100, 20)
                 
             if c == 'D':
-                result += 500
-                if s[i-1] == 'C' and i != 0:
-                    result -= 200
+                result = self.calculateCurrResult(result, s, i, 'C', 500, 200)
                                     
             if c == 'M':
-                result += 1000
-                if s[i-1] == 'C' and i != 0:
-                    result -= 200
+                result = self.calculateCurrResult(result, s, i, 'C', 1000, 200)
                 
+        return result
+    
+    
+    def calculateCurrResult(self, result: int, s: str, i: int, c: str, val: int, subtractVal: int) -> int:
+        result += val
+        if s[i-1] == c and i != 0:
+            result -= subtractVal
+        
         return result
